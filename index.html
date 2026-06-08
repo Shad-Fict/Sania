@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ For You, Saniaaaa ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff6b9d;
+            --purple: #c44dff;
+            --gold: #ffd700;
+            --rose: #ff2d7b;
+            --lavender: #e8c4f8;
+            --soft-pink: #ffb6c1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: #0a0a1a;
+            color: white;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a2e; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(var(--pink), var(--purple)); border-radius: 10px; }
+
+        /* Loader */
+        .loader-wrapper {
+            position: fixed;
+            inset: 0;
+            background: #0a0a1a;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.8s, visibility 0.8s;
+        }
+        .loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-heart {
+            font-size: 60px;
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        .loader-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--pink);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.5s 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+        }
+
+        /* Floating Hearts */
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: floatHeart 4s ease-in forwards;
+            font-size: 20px;
+        }
+
+        @keyframes floatHeart {
+            0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+            50% { opacity: 0.8; transform: translateY(-200px) scale(1.2) rotate(15deg); }
+            100% { opacity: 0; transform: translateY(-500px) scale(0.5) rotate(-15deg); }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at center, #1a0a2e 0%, #0a0a1a 70%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(196,77,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 50%, rgba(255,107,157,0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 50%, rgba(255,45,123,0.08) 0%, transparent 40%);
+            animation: aurora 15s ease-in-out infinite;
+        }
+
+        @keyframes aurora {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        /* Particle canvas */
+        #particles-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        /* Sparkle */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Name Animation */
+        .name-letter {
+            display: inline-block;
+            animation: bounce-letter 0.6s ease-in-out infinite;
+        }
+
+        @keyframes bounce-letter {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255,107,157,0.5),
+                         0 0 20px rgba(255,107,157,0.3),
+                         0 0 40px rgba(255,107,157,0.2);
+        }
+
+        .glow-text-purple {
+            text-shadow: 0 0 10px rgba(196,77,255,0.5),
+                         0 0 20px rgba(196,77,255,0.3),
+                         0 0 40px rgba(196,77,255,0.2);
+        }
+
+        /* Card Glow */
+        .card-glow {
+            background: linear-gradient(135deg, rgba(255,107,157,0.1), rgba(196,77,255,0.1));
+            border: 1px solid rgba(255,107,157,0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .card-glow:hover {
+            border-color: rgba(255,107,157,0.5);
+            box-shadow: 0 0 30px rgba(255,107,157,0.2),
+                         0 0 60px rgba(196,77,255,0.1);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Reason Cards */
+        .reason-card {
+            background: linear-gradient(135deg, rgba(255,107,157,0.05), rgba(196,77,255,0.05));
+            border: 1px solid rgba(255,107,157,0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            border-color: var(--pink);
+            box-shadow: 0 20px 40px rgba(255,107,157,0.15);
+        }
+
+        .reason-card .emoji {
+            font-size: 3rem;
+            transition: transform 0.5s;
+        }
+
+        .reason-card:hover .emoji {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--pink), var(--purple), var(--pink));
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line { left: 20px; }
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            border-radius: 50%;
+            border: 3px solid #0a0a1a;
+            box-shadow: 0 0 15px rgba(255,107,157,0.5);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 15px rgba(255,107,157,0.5); }
+            50% { box-shadow: 0 0 25px rgba(255,107,157,0.8); }
+        }
+
+        /* Photo Gallery */
+        .photo-card {
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .photo-card::after {
+            content: '❤️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 4rem;
+            transition: transform 0.3s;
+            z-index: 2;
+        }
+
+        .photo-card:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 0 20px 60px rgba(255,107,157,0.3);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Letter Section */
+        .letter-paper {
+            background: linear-gradient(135deg, #fff9f0, #fff5f5);
+            color: #333;
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transform: rotate(-1deg);
+        }
+
+        .letter-paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pink), var(--purple), var(--pink));
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: confetti-fall 3s ease-in forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 25px rgba(255,107,157,0.4);
+            transition: all 0.3s;
+            animation: pulse-music 2s ease-in-out infinite;
+            color: white;
+        }
+
+        @keyframes pulse-music {
+            0%, 100% { box-shadow: 0 5px 25px rgba(255,107,157,0.4); }
+            50% { box-shadow: 0 5px 40px rgba(255,107,157,0.7); }
+        }
+
+        .music-btn:hover { transform: scale(1.1); }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typewriter */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--pink);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--pink); }
+        }
+
+        /* Wish card */
+        .wish-card {
+            background: linear-gradient(135deg, rgba(255,107,157,0.08), rgba(196,77,255,0.08));
+            border: 1px solid rgba(255,107,157,0.2);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+        .wish-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--pink);
+            box-shadow: 0 20px 50px rgba(255,107,157,0.2);
+        }
+
+        /* Rainbow text */
+        .rainbow-text {
+            background: linear-gradient(90deg, var(--pink), var(--purple), var(--gold), var(--pink), var(--purple));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-shift 3s linear infinite;
+        }
+
+        @keyframes rainbow-shift {
+            to { background-position: 200% center; }
+        }
+
+        /* Stars background */
+        .stars-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Promise card */
+        .promise-card {
+            background: linear-gradient(135deg, rgba(255,107,157,0.06), rgba(196,77,255,0.06));
+            border: 1px solid rgba(255,107,157,0.15);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+        .promise-card:hover {
+            border-color: var(--purple);
+            background: linear-gradient(135deg, rgba(255,107,157,0.12), rgba(196,77,255,0.12));
+            transform: translateX(10px);
+        }
+
+        /* Button glow */
+        .btn-glow {
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 25px rgba(255,107,157,0.3);
+        }
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(255,107,157,0.5);
+        }
+
+        /* Flip card */
+        .flip-card { perspective: 1000px; cursor: pointer; }
+        .flip-card-inner {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            border-radius: 20px;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            position: absolute;
+            inset: 0;
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--pink), var(--purple), var(--pink), transparent);
+            margin: 0 auto;
+            max-width: 300px;
+        }
+
+        /* Nav */
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        .nav-link:hover { color: var(--pink); }
+
+        /* Sculpted shimmer */
+        .shimmer {
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            background-size: 200% 100%;
+            animation: shimmer-move 2s infinite;
+        }
+        @keyframes shimmer-move {
+            from { background-position: 200% 0; }
+            to { background-position: -200% 0; }
+        }
+
+        /* Button click ripple */
+        .ripple-btn { position: relative; overflow: hidden; }
+        .ripple-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-anim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 16px;
+            box-shadow: 0 0 60px rgba(255,107,157,0.3);
+        }
+
+        /* Countdown */
+        .countdown-item {
+            background: linear-gradient(135deg, rgba(255,107,157,0.1), rgba(196,77,255,0.1));
+            border: 1px solid rgba(255,107,157,0.2);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            min-width: 90px;
+        }
+
+        /* Qualities marquee */
+        .qualities-track {
+            display: flex;
+            animation: marquee 20s linear infinite;
+            gap: 2rem;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .quality-tag {
+            background: linear-gradient(135deg, rgba(255,107,157,0.15), rgba(196,77,255,0.15));
+            border: 1px solid rgba(255,107,157,0.25);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: var(--soft-pink);
+        }
+
+        /* Floating action */
+        .float-up {
+            animation: floatUp 3s ease-in-out infinite;
+        }
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 640px) {
+            .letter-paper { padding: 1.5rem; transform: rotate(0deg); }
+            .music-btn { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader-heart">💕</div>
+        <div class="loader-text">Creating something special for Saniaaaa...</div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <img id="lightbox-img" src="" alt="Photo">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="#hero" class="text-lg font-bold" style="font-family: 'Dancing Script', cursive; color: var(--pink);">Saniaaaa ✨</a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#reasons" class="nav-link">Reasons</a>
+                <a href="#qualities" class="nav-link">Qualities</a>
+                <a href="#memories" class="nav-link">Memories</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#promises" class="nav-link">Promises</a>
+                <a href="#letter" class="nav-link">Letter</a>
+            </div>
+            <button class="md:hidden text-white" id="mobile-menu-btn">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-gray-900/95 backdrop-blur-md px-6 py-4" id="mobile-menu">
+            <div class="flex flex-col gap-4">
+                <a href="#about" class="nav-link text-lg">About</a>
+                <a href="#reasons" class="nav-link text-lg">Reasons</a>
+                <a href="#qualities" class="nav-link text-lg">Qualities</a>
+                <a href="#memories" class="nav-link text-lg">Memories</a>
+                <a href="#gallery" class="nav-link text-lg">Gallery</a>
+                <a href="#promises" class="nav-link text-lg">Promises</a>
+                <a href="#letter" class="nav-link text-lg">Letter</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero-section" id="hero">
+        <canvas id="particles-canvas"></canvas>
+        <div class="stars-bg" id="stars-container"></div>
+        <div class="relative z-10 text-center px-4" id="hero-content" style="opacity:0;">
+            <p class="text-sm md:text-base tracking-widest uppercase mb-4" style="color: var(--lavender);">This is dedicated to my favourite person</p>
+            <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold mb-6" style="font-family: 'Playfair Display', serif;">
+                <span class="glow-text" id="sania-name"></span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-2 font-light" style="color: var(--soft-pink);">My First Priority ♾️</p>
+            <p class="text-base md:text-lg mb-10 font-light max-w-lg mx-auto" style="color: rgba(255,255,255,0.6);">The one who makes everything brighter, warmer, and simply better ✨</p>
+            <a href="#about" class="btn-glow ripple-btn inline-block">Discover More 💫</a>
+            <div class="mt-16 float-up">
+                <i data-lucide="chevrons-down" class="w-8 h-8 mx-auto" style="color: var(--pink); opacity: 0.5;"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="py-20 md:py-32 px-4 relative" id="about">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">Who is she?</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text" style="font-family: 'Playfair Display', serif;">The Amazing Saniaaaa ✨</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="reveal">
+                    <div class="photo-card aspect-[3/4] max-w-sm mx-auto">
+                        <img src="images/sania1.jpg" alt="Saniaaaa" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="reveal space-y-6">
+                    <p class="text-lg leading-relaxed" style="color: rgba(255,255,255,0.85);">
+                        Some people walk into your life and everything just <span class="font-bold" style="color: var(--pink);">makes sense</span>. That's exactly what happened when Saniaaaa came into mine. 💫
+                    </p>
+                    <p class="text-lg leading-relaxed" style="color: rgba(255,255,255,0.85);">
+                        She's not just a best friend — she's the <span class="font-bold" style="color: var(--purple);">standard</span>, the <span class="font-bold" style="color: var(--pink);">vibe</span>, the <span class="font-bold" style="color: var(--gold);">sunshine</span> on cloudy days, and the reason I believe in pure, genuine friendships. 🫶🏻
+                    </p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <span class="px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(255,107,157,0.15); color: var(--pink); border: 1px solid rgba(255,107,157,0.3);">🌟 Irreplaceable</span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(196,77,255,0.15); color: var(--purple); border: 1px solid rgba(196,77,255,0.3);">💕 Precious</span>
+                        <span class="px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.3);">✨ One in a Billion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== REASONS ==================== -->
+    <section class="py-20 md:py-32 px-4" id="reasons" style="background: linear-gradient(180deg, #0a0a1a 0%, #0f0a20 50%, #0a0a1a 100%);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">Why her?</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text" style="font-family: 'Playfair Display', serif;">Reasons I Adore You 💖</h2>
+                <p class="mt-4" style="color: rgba(255,255,255,0.5);">Hover on each card to feel the love ✨</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">💫</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Energy</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">The way you light up every room and make everyone feel alive — your energy is simply unmatched!</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">🫶🏻</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Heart</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">The most beautiful heart that cares deeply, loves fiercely, and never gives up on people.</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">😂</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Humor</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">Every conversation with you turns into a laughter fest — you're the funniest person I know!</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">💪🏻</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Strength</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">The way you face every challenge with grace and courage inspires me every single day.</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">🧠</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Wisdom</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">Your advice always hits different — you see things nobody else can and always know what to say.</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">👑</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Vibe</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">Main character energy always! You walk in and the whole atmosphere changes — that's the Saniaaaa effect!</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">🤗</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Hugs</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">Your hugs have the magical power to make everything feel okay, even on the worst days.</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">🎵</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Voice</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">Whether you're singing, laughing, or just talking — your voice is my favorite sound in the world.</p>
+                </div>
+                <div class="reason-card reveal">
+                    <div class="emoji mb-4">♾️</div>
+                    <h3 class="text-xl font-semibold mb-2" style="color: var(--pink);">Your Loyalty</h3>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">Riding or dying through everything — your loyalty is something I never have to question. Always there. Always.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== QUALITIES MARQUEE ==================== -->
+    <section class="py-12 overflow-hidden" id="qualities">
+        <div class="qualities-track">
+            <span class="quality-tag">✨ Beautiful Soul</span>
+            <span class="quality-tag">🌸 Kind Heart</span>
+            <span class="quality-tag">🔥 Bold</span>
+            <span class="quality-tag">💎 Precious</span>
+            <span class="quality-tag">🌟 Shining Star</span>
+            <span class="quality-tag">🦋 Free Spirit</span>
+            <span class="quality-tag">👑 Queen</span>
+            <span class="quality-tag">💖 Loving</span>
+            <span class="quality-tag">🧠 Smart</span>
+            <span class="quality-tag">🫶🏻 Caring</span>
+            <span class="quality-tag">💪 Strong</span>
+            <span class="quality-tag">🎉 Fun</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="quality-tag">✨ Beautiful Soul</span>
+            <span class="quality-tag">🌸 Kind Heart</span>
+            <span class="quality-tag">🔥 Bold</span>
+            <span class="quality-tag">💎 Precious</span>
+            <span class="quality-tag">🌟 Shining Star</span>
+            <span class="quality-tag">🦋 Free Spirit</span>
+            <span class="quality-tag">👑 Queen</span>
+            <span class="quality-tag">💖 Loving</span>
+            <span class="quality-tag">🧠 Smart</span>
+            <span class="quality-tag">🫶🏻 Caring</span>
+            <span class="quality-tag">💪 Strong</span>
+            <span class="quality-tag">🎉 Fun</span>
+        </div>
+    </section>
+
+    <!-- ==================== MEMORIES TIMELINE ==================== -->
+    <section class="py-20 md:py-32 px-4" id="memories">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">Our Journey</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text-purple" style="font-family: 'Playfair Display', serif;">Cherished Memories 💫</h2>
+            </div>
+            <div class="relative">
+                <div class="timeline-line hidden md:block"></div>
+                <div class="space-y-12">
+                    <!-- Memory 1 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 reveal">
+                        <div class="md:w-1/2 md:text-right md:pr-12">
+                            <div class="card-glow rounded-2xl p-6">
+                                <p class="text-sm font-medium mb-2" style="color: var(--pink);">The Beginning 🌱</p>
+                                <h3 class="text-xl font-semibold mb-2">When We First Met</h3>
+                                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">The day that changed everything. Little did I know this person would become my whole world.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-dot flex-shrink-0 hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-12"></div>
+                    </div>
+                    <!-- Memory 2 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 reveal">
+                        <div class="md:w-1/2 md:pr-12"></div>
+                        <div class="timeline-dot flex-shrink-0 hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <div class="card-glow rounded-2xl p-6">
+                                <p class="text-sm font-medium mb-2" style="color: var(--purple);">Late Nights 🌙</p>
+                                <h3 class="text-xl font-semibold mb-2">3 AM Conversations</h3>
+                                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Those endless nights talking about everything and nothing — those are the moments I treasure most.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Memory 3 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 reveal">
+                        <div class="md:w-1/2 md:text-right md:pr-12">
+                            <div class="card-glow rounded-2xl p-6">
+                                <p class="text-sm font-medium mb-2" style="color: var(--gold);">Laughter 🤣</p>
+                                <h3 class="text-xl font-semibold mb-2">Inside Jokes Factory</h3>
+                                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">We have so many inside jokes that nobody else understands — and that makes them even more special.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-dot flex-shrink-0 hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-12"></div>
+                    </div>
+                    <!-- Memory 4 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 reveal">
+                        <div class="md:w-1/2 md:pr-12"></div>
+                        <div class="timeline-dot flex-shrink-0 hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <div class="card-glow rounded-2xl p-6">
+                                <p class="text-sm font-medium mb-2" style="color: var(--pink);">Being There 🫂</p>
+                                <h3 class="text-xl font-semibold mb-2">Through Thick & Thin</h3>
+                                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">Every storm we faced together made our bond unbreakable. You never left my side, ever.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Memory 5 -->
+                    <div class="flex flex-col md:flex-row items-center gap-6 reveal">
+                        <div class="md:w-1/2 md:text-right md:pr-12">
+                            <div class="card-glow rounded-2xl p-6">
+                                <p class="text-sm font-medium mb-2" style="color: var(--purple);">Forever 💫</p>
+                                <h3 class="text-xl font-semibold mb-2">And The Story Continues...</h3>
+                                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">The best part? There are infinite more memories waiting to be created. This is just the beginning! 🚀</p>
+                            </div>
+                        </div>
+                        <div class="timeline-dot flex-shrink-0 hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALLERY ==================== -->
+    <section class="py-20 md:py-32 px-4" id="gallery" style="background: linear-gradient(180deg, #0a0a1a 0%, #0f0a20 50%, #0a0a1a 100%);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">Our Moments</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text" style="font-family: 'Playfair Display', serif;">Beautiful Gallery 📸</h2>
+                <p class="mt-4" style="color: rgba(255,255,255,0.5);">Click any photo to see the magic ✨</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="photo-card aspect-square reveal gallery-item" data-src="images/sania1.jpg">
+    <img src="images/sania1.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-[3/4] row-span-2 reveal gallery-item" data-src="images/sania2.jpg">
+    <img src="images/sania2.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-square reveal gallery-item" data-src="images/sania3.jpg">
+    <img src="images/sania3.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-square reveal gallery-item" data-src="images/sania4.jpg">
+    <img src="images/sania4.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-square reveal gallery-item" data-src="images/sania5.jpg">
+    <img src="images/sania5.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-square reveal gallery-item" data-src="images/sania6.jpg">
+    <img src="images/sania6.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-[4/3] col-span-2 reveal gallery-item" data-src="images/sania7.jpg">
+    <img src="images/sania7.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-square reveal gallery-item" data-src="images/sania8.jpg">
+    <img src="images/sania8.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-square reveal gallery-item" data-src="images/sania9.jpg">
+    <img src="images/sania9.jpg" alt="Memory" loading="lazy">
+</div>
+
+<div class="photo-card aspect-square reveal gallery-item" data-src="images/sania10.jpg">
+    <img src="images/sania10.jpg" alt="Memory" loading="lazy">
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROMISES ==================== -->
+    <section class="py-20 md:py-32 px-4" id="promises">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">My Word</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text-purple" style="font-family: 'Playfair Display', serif;">Promises To You 🤝</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="promise-card reveal">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">🫶🏻</span>
+                        <div>
+                            <h3 class="font-semibold text-lg" style="color: var(--pink);">I'll Always Have Your Back</h3>
+                            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">No matter what life throws at you, I'll be standing right beside you — always.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">🤗</span>
+                        <div>
+                            <h3 class="font-semibold text-lg" style="color: var(--purple);">I'll Never Leave Your Side</h3>
+                            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Through good times and bad, through happy and sad — my friendship isn't conditional.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">🎂</span>
+                        <div>
+                            <h3 class="font-semibold text-lg" style="color: var(--pink);">Every Birthday Will Be Special</h3>
+                            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">I'll make sure every single birthday of yours feels as amazing as you are!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">📞</span>
+                        <div>
+                            <h3 class="font-semibold text-lg" style="color: var(--purple);">I'm Just One Call Away</h3>
+                            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">2 AM, 3 PM, anytime. You need me, I'm there — no questions asked.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">🫡</span>
+                        <div>
+                            <h3 class="font-semibold text-lg" style="color: var(--pink);">You'll Always Be My First Priority</h3>
+                            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Before anything and everything — you come first. Always have, always will.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">♾️</span>
+                        <div>
+                            <h3 class="font-semibold text-lg" style="color: var(--purple);">This Friendship Is Forever</h3>
+                            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">No distance, no fight, no circumstance can ever break what we have. This is it — forever.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WISHES (Flip Cards) ==================== -->
+    <section class="py-20 md:py-32 px-4" style="background: linear-gradient(180deg, #0a0a1a 0%, #0f0a20 50%, #0a0a1a 100%);">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">Tap to Reveal</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text" style="font-family: 'Playfair Display', serif;">Special Wishes For You 🎁</h2>
+                <p class="mt-4" style="color: rgba(255,255,255,0.5);">Click each card to reveal a wish!</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner" style="min-height: 220px;">
+                        <div class="flip-card-front wish-card flex items-center justify-center">
+                            <div>
+                                <p class="text-4xl mb-3">🎉</p>
+                                <p class="font-semibold" style="color: var(--pink);">Tap to Reveal</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back wish-card flex items-center justify-center" style="background: linear-gradient(135deg, rgba(255,107,157,0.15), rgba(196,77,255,0.15));">
+                            <div>
+                                <p class="text-3xl mb-3">🌟</p>
+                                <p class="font-medium text-lg" style="color: var(--pink);">May all your dreams come true, because you deserve every single one of them!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner" style="min-height: 220px;">
+                        <div class="flip-card-front wish-card flex items-center justify-center">
+                            <div>
+                                <p class="text-4xl mb-3">🎁</p>
+                                <p class="font-semibold" style="color: var(--purple);">Tap to Reveal</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back wish-card flex items-center justify-center" style="background: linear-gradient(135deg, rgba(196,77,255,0.15), rgba(255,107,157,0.15));">
+                            <div>
+                                <p class="text-3xl mb-3">💕</p>
+                                <p class="font-medium text-lg" style="color: var(--purple);">May you always find reasons to smile, and may your heart never know sorrow.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner" style="min-height: 220px;">
+                        <div class="flip-card-front wish-card flex items-center justify-center">
+                            <div>
+                                <p class="text-4xl mb-3">✨</p>
+                                <p class="font-semibold" style="color: var(--gold);">Tap to Reveal</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back wish-card flex items-center justify-center" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,107,157,0.15));">
+                            <div>
+                                <p class="text-3xl mb-3">🏆</p>
+                                <p class="font-medium text-lg" style="color: var(--gold);">May you achieve everything you've ever wanted and more — the world is yours!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LOVE COUNTER ==================== -->
+    <section class="py-16 px-4">
+        <div class="max-w-3xl mx-auto text-center reveal">
+            <p class="text-sm tracking-widest uppercase mb-6" style="color: var(--lavender);">Since the day we became friends</p>
+            <div class="flex flex-wrap justify-center gap-4" id="counter">
+                <div class="countdown-item">
+                    <p class="text-3xl font-bold" style="color: var(--pink);" id="count-days">0</p>
+                    <p class="text-xs mt-1" style="color: rgba(255,255,255,0.5);">Days</p>
+                </div>
+                <div class="countdown-item">
+                    <p class="text-3xl font-bold" style="color: var(--purple);" id="count-hours">0</p>
+                    <p class="text-xs mt-1" style="color: rgba(255,255,255,0.5);">Hours</p>
+                </div>
+                <div class="countdown-item">
+                    <p class="text-3xl font-bold" style="color: var(--gold);" id="count-minutes">0</p>
+                    <p class="text-xs mt-1" style="color: rgba(255,255,255,0.5);">Minutes</p>
+                </div>
+                <div class="countdown-item">
+                    <p class="text-3xl font-bold" style="color: var(--soft-pink);" id="count-seconds">0</p>
+                    <p class="text-xs mt-1" style="color: rgba(255,255,255,0.5);">Seconds</p>
+                </div>
+            </div>
+            <p class="mt-6 text-lg" style="color: rgba(255,255,255,0.6); font-family: 'Dancing Script', cursive; font-size: 1.4rem;">of loving our friendship 💖</p>
+        </div>
+    </section>
+
+    <!-- ==================== LETTER ==================== -->
+    <section class="py-20 md:py-32 px-4" id="letter">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">From My Heart</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text" style="font-family: 'Playfair Display', serif;">A Letter For You 💌</h2>
+                <p class="mt-4" style="color: rgba(255,255,255,0.5);">Click the envelope to open it ✉️</p>
+            </div>
+            <div class="reveal">
+                <div id="envelope" class="cursor-pointer text-center p-10 rounded-3xl transition-all duration-500" style="background: linear-gradient(135deg, rgba(255,107,157,0.1), rgba(196,77,255,0.1)); border: 2px solid rgba(255,107,157,0.3); min-height: 120px; display: flex; align-items: center; justify-content: center;" onclick="openLetter()">
+                    <div id="envelope-content">
+                        <p class="text-5xl mb-3">💌</p>
+                        <p class="font-medium text-lg" style="color: var(--pink);">Tap to Open Your Letter</p>
+                    </div>
+                </div>
+                <div id="letter-content" class="hidden">
+                    <div class="letter-paper">
+                        <p style="font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--rose); margin-bottom: 1rem;">Dear Saniaaaa,</p>
+                        <p class="mb-4 leading-relaxed" style="color: #555;">There are no words that can fully describe how much you mean to me. But I'll try...</p>
+                        <p class="mb-4 leading-relaxed" style="color: #555;">You came into my life like a beautiful surprise — and everything has been different ever since. Better. Brighter. More meaningful. You showed me what true friendship really looks like. 🫶🏻</p>
+                        <p class="mb-4 leading-relaxed" style="color: #555;">You're not just my best friend — you're my safe space, my loudest cheerleader, my 3 AM confidant, and the person who understands me even when I don't say a word.</p>
+                        <p class="mb-4 leading-relaxed" style="color: #555;">Thank you for every laugh we've shared, every tear you've wiped, every dumb joke you've laughed at, and every moment you've stood by me when the world felt too heavy.</p>
+                        <p class="mb-4 leading-relaxed" style="color: #555;">You deserve the world and more. I can't give you the world, but I can promise you this — I will always be there. Always. No matter what. 💖</p>
+                        <p class="mb-4 leading-relaxed" style="color: #555;">You're my first priority, my Saniaaaa, and nobody — absolutely nobody — can ever take your place.</p>
+                        <p class="mt-6" style="font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--rose);">Forever & Always Yours,</p>
+                        <p style="font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--purple);">Your Best Friend 💕</p>
+                        <p class="mt-4 text-right text-3xl">🫶🏻✨</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COMPLIMENT GENERATOR ==================== -->
+    <section class="py-20 md:py-32 px-4" style="background: linear-gradient(180deg, #0a0a1a 0%, #0f0a20 50%, #0a0a1a 100%);">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="reveal">
+                <p class="text-sm tracking-widest uppercase mb-2" style="color: var(--lavender);">Need a Boost?</p>
+                <h2 class="text-4xl md:text-5xl font-bold glow-text-purple mb-8" style="font-family: 'Playfair Display', serif;">Daily Compliment 💝</h2>
+                <div class="card-glow rounded-3xl p-8 md:p-10 mb-8">
+                    <p class="text-xl md:text-2xl font-medium mb-6" id="compliment-text" style="color: var(--soft-pink); min-height: 80px; display: flex; align-items: center; justify-content: center;">Click below for a compliment! ✨</p>
+                    <button class="btn-glow ripple-btn" onclick="generateCompliment()">Get a Compliment 🌸</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FINAL MESSAGE ==================== -->
+    <section class="py-20 md:py-32 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 stars-bg" id="final-stars"></div>
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <div class="reveal">
+                <p class="text-6xl mb-6">💕</p>
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 rainbow-text" style="font-family: 'Playfair Display', serif;">You Are My Everything</h2>
+                <p class="text-xl md:text-2xl font-light mb-10" style="color: rgba(255,255,255,0.7); font-family: 'Dancing Script', cursive; font-size: 1.8rem;">
+                    "Some people arrive and make such a mark on your life, it becomes impossible to imagine it without them." 🌟
+                </p>
+                <button class="btn-glow ripple-btn" onclick="launchConfetti()">Celebrate Our Friendship 🎉</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="py-10 px-4 text-center" style="background: #060612;">
+        <div class="section-divider mb-8"></div>
+        <p style="font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--pink);" class="mb-2">Made with 💖 for Saniaaaa</p>
+        <p style="color: rgba(255,255,255,0.3); font-size: 0.85rem;">Because you deserve the world and more ✨🫶🏻</p>
+        <p class="mt-4" style="color: rgba(255,255,255,0.2); font-size: 0.75rem;">© Forever Friendship | Best Friends for Infinity ♾️</p>
+    </footer>
+
+    <!-- Music Button -->
+    <button class="music-btn" id="music-btn" onclick="toggleMusic()">
+        <i data-lucide="volume-2" class="w-6 h-6" id="music-icon"></i>
+    </button>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/audio/2024/11/01/audio_075ef49523.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // ==================== INITIALIZATION ====================
+        lucide.createIcons();
+
+        // ==================== LOADER ====================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('hero-content').style.opacity = '1';
+                document.getElementById('hero-content').style.transition = 'opacity 1s ease';
+                animateName();
+            }, 2000);
+        });
+
+        // ==================== NAVBAR ====================
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 26, 0.95)';
+                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.borderBottom = '1px solid rgba(255,107,157,0.1)';
+            } else {
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
+                navbar.style.borderBottom = 'none';
+            }
+        });
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // ==================== NAME ANIMATION ====================
+        function animateName() {
+            const nameEl = document.getElementById('sania-name');
+            const name = 'Saniaaaa';
+            let html = '';
+            const colors = ['#ff6b9d', '#c44dff', '#ffd700', '#ff2d7b', '#ff6b9d', '#c44dff', '#ffd700', '#ff2d7b'];
+            name.split('').forEach((letter, i) => {
+                html += `<span class="name-letter" style="animation-delay: ${i * 0.1}s; color: ${colors[i]};">${letter}</span>`;
+            });
+            nameEl.innerHTML = html;
+        }
+
+        // ==================== PARTICLES CANVAS ====================
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                const colors = ['255,107,157', '196,77,255', '255,215,0'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color},${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            // Connect nearby particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255,107,157,${0.08 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ==================== STARS GENERATOR ====================
+        function generateStars(containerId, count) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(star);
+            }
+        }
+        generateStars('stars-container', 60);
+        generateStars('final-stars', 40);
+
+        // ==================== SCROLL REVEAL ====================
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // ==================== FLOATING HEARTS ON CLICK ====================
+        document.addEventListener('click', (e) => {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            const hearts = ['❤️', '💕', '💖', '💗', '🩷', '🫶🏻', '✨', '💫'];
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        });
+
+        // ==================== CONFETTI ====================
+        function launchConfetti() {
+            const colors = ['#ff6b9d', '#c44dff', '#ffd700', '#ff2d7b', '#e8c4f8', '#ffb6c1', '#ff4757', '#fff'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // ==================== MUSIC ====================
+        const musicBtn = document.getElementById('music-btn');
+        const bgMusic = document.getElementById('bg-music');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                isPlaying = false;
+                document.getElementById('music-icon').setAttribute('data-lucide', 'volume-x');
+            } else {
+                bgMusic.volume = 0.3;
+                bgMusic.play().catch(() => {});
+                isPlaying = true;
+                document.getElementById('music-icon').setAttribute('data-lucide', 'volume-2');
+            }
+            lucide.createIcons();
+        }
+
+        // ==================== LETTER ====================
+        function openLetter() {
+            const letterContent = document.getElementById('letter-content');
+            const envelope = document.getElementById('envelope');
+            envelope.style.transform = 'scale(0.8)';
+            envelope.style.opacity = '0';
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                letterContent.classList.remove('hidden');
+                letterContent.style.opacity = '0';
+                letterContent.style.transition = 'opacity 0.8s ease';
+                setTimeout(() => {
+                    letterContent.style.opacity = '1';
+                }, 50);
+                launchConfetti();
+            }, 500);
+        }
+
+        // ==================== GALLERY LIGHTBOX ====================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                lightboxImg.src = item.dataset.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        // ==================== COMPLIMENT GENERATOR ====================
+        const compliments = [
+            "You have the most beautiful smile in the entire universe! 😊",
+            "Your kindness makes the world a better place 🌍",
+            "You're stronger than you think and braver than you believe 💪",
+            "The world got so much better the day you were born 🎂",
+            "Your energy is absolutely contagious and I love it! ⚡",
+            "You're not just a star — you're the whole constellation ✨",
+            "Your laugh could cure sadness, no joke 😂",
+            "You make ordinary moments extraordinary 🌈",
+            "You're the kind of friend everyone wishes they had 🫶🏻",
+            "Your heart is made of pure gold 💛",
+            "You light up every room you walk into 💡",
+            "You're beautifully and wonderfully made, never forget that 🌸",
+            "Your vibe? Absolutely unmatched! 👑",
+            "You deserve all the happiness in the world and more 🎁",
+            "You're proof that angels walk among us 👼",
+            "Your presence alone makes everything 100x better 🚀",
+            "You're a masterpiece and a work of art all at once 🎨",
+            "There's literally no one like you — and that's your superpower! 🦸‍♀️",
+            "You're the definition of 'main character energy' 🌟",
+            "If friendship had a face, it would look exactly like yours 💕"
+        ];
+
+        function generateCompliment() {
+            const text = compliments[Math.floor(Math.random() * compliments.length)];
+            const el = document.getElementById('compliment-text');
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                el.textContent = text;
+                el.style.transition = 'all 0.5s ease';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 300);
+            // Mini confetti
+            launchMiniConfetti();
+        }
+
+        function launchMiniConfetti() {
+            const colors = ['#ff6b9d', '#c44dff', '#ffd700', '#ff2d7b', '#e8c4f8'];
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = (Math.random() * 40 + 30) + 'vw';
+                confetti.style.top = '40vh';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 8 + 4) + 'px';
+                confetti.style.height = (Math.random() * 8 + 4) + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // ==================== FRIENDSHIP COUNTER ====================
+        // Set a meaningful date — customize this!
+        const friendshipStart = new Date('2023-01-01T00:00:00');
+
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - friendshipStart;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('count-days').textContent = days;
+            document.getElementById('count-hours').textContent = hours;
+            document.getElementById('count-minutes').textContent = minutes;
+            document.getElementById('count-seconds').textContent = seconds;
+        }
+
+        updateCounter();
+        setInterval(updateCounter, 1000);
+
+        // ==================== RIPPLE BUTTON EFFECT ====================
+        document.querySelectorAll('.ripple-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // ==================== SMOOTH SCROLL ====================
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ==================== INITIAL CONFETTI ON LOAD ====================
+        setTimeout(() => {
+            launchConfetti();
+        }, 2500);
+    </script>
+</body>
+</html>
+
+
+i want to replace ever ypci how can i do it 
